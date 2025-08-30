@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Birthday Presents 🎁</title>
+  <style>
+    body {
+      background: #fff0f6;
+      font-family: 'Comic Sans MS', sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #ff4081;
+      margin-bottom: 80px;
+    }
+    .presents {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 60px;
+      max-width: 600px;
+      margin: auto;
+      margin-top: 100px;
+    }
+    .present {
+      width: 120px;
+      height: 120px;
+      background: #ff69b4;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 40px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      position: relative;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+    .present:hover {
+      transform: scale(1.1);
+    }
+    .message {
+      display: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      padding: 12px;
+      background: #fff;
+      border: 2px solid #ff69b4;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #333;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.25);
+      z-index: 5;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
+    .row-top .message {
+      bottom: 140px;
+    }
+    .row-bottom .message {
+      top: 140px;
+    }
+    .message.show {
+      display: block;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <h1>❤️ Happy birthday! Click a present to open your surprise! ❤️</h1>
+
+  <div class="presents">
+    <div class="present row-top">🎁
+      <div class="message">You are beautiful and cute, remember that! 💋</div>
+    </div>
+    <div class="present row-top">🎁
+      <div class="message">You are strong and valued, little goat 💪</div>
+    </div>
+    <div class="present row-top">🎁
+      <div class="message">You light up every dark room with your presence ✨</div>
+    </div>
+    <div class="present row-bottom">🎁
+      <div class="message">You have the best handlebars! 🐐</div>
+    </div>
+    <div class="present row-bottom">🎁
+      <div class="message"> You are amazing and thouhgtful! 💞</div>
+    </div>
+    <div class="present row-bottom">🎁
+      <div class="message"> Have a great day and hope you will have just great days! 🎀</div>
+    </div>
+  </div>
+
+  <script>
+    const presents = document.querySelectorAll('.present');
+    let hideTimeout = null;
+
+    presents.forEach(present => {
+      present.addEventListener('click', () => {
+        const msg = present.querySelector('.message');
+        const isVisible = msg.classList.contains('show');
+
+        document.querySelectorAll('.message').forEach(m => {
+          m.classList.remove('show');
+          m.style.display = 'none';
+        });
+
+        if (hideTimeout) clearTimeout(hideTimeout);
+
+        if (!isVisible) {
+          msg.style.display = 'block';
+          setTimeout(() => msg.classList.add('show'), 10);
+
+          hideTimeout = setTimeout(() => {
+            msg.classList.remove('show');
+            setTimeout(() => msg.style.display = 'none', 400);
+          }, 3000);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
